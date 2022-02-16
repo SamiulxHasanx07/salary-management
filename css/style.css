@@ -7,3 +7,25 @@
     padding:0;
     box-sizing: border-box;
 }
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --primary-color:#59A5FF;
+    --custom-white: #F8F8F8;
+    --bg-gray: #DCDCDC;
+}
+
+
+/* Primary Background Color  */
+.pr-bg-color{
+    background-color: var(--primary-color);
+}
+.calculation-section{
+    background-color: var(--custom-white);
+}
+
+.dollar-sign{
+    width: 20px;
+}
