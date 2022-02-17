@@ -116,18 +116,33 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     const balanceValue = balanceTxt.innerText;
     const balance = parseFloat(balanceValue);
 
+    // remain balance 
+    const remainBalanceId = selectElementId('remain-balance');
+    // Total saving amount 
+    const totalSaving = selectElementId('saving-amount');
+    // saving parcent
+    const savingParcent = document.getElementById('saving-percent');
 
-    // update balance 
+    // update balance and remain balance
     const updateBalance = totalIncome - getTotalExpense;    
     if(totalIncome>getTotalExpense){
         balanceTxt.innerText = updateBalance;
+
+        // reset 
+        remainBalanceId.innerText = updateBalance;
+        totalSaving.innerText = '';
+        savingParcent.value = '';
     }else if(totalIncome<getTotalExpense){
         balanceTxt.innerText = 'Income not Enough';
         balanceTxt.style.color= 'red';
     }
 })
 
-
+// select id 
+function selectElementId(elementId){
+    const idName = document.getElementById(elementId)
+    return idName;
+}
 document.getElementById('save-btn').addEventListener('click', function(){
 
     // const saveingsParcentField = document.getElementById('saving-percent');
@@ -165,7 +180,9 @@ document.getElementById('save-btn').addEventListener('click', function(){
     
 
     // updateSaveings
-    const totalSaving = document.getElementById('saving-amount');
+    // const totalSaving = document.getElementById('saving-amount');
+
+    const totalSaving = selectElementId('saving-amount');
 
     // totalSaving.innerText = savingsAmount;
 
@@ -174,7 +191,7 @@ document.getElementById('save-btn').addEventListener('click', function(){
     if(balance>=savingsAmount){
         totalSaving.innerText = savingsAmount;
         totalSaving.style.color  = '';
-    }else{
+    }else if(balance<savingsAmount){
         totalSaving.innerText = 'insufficient balance';
         totalSaving.style.color  = 'red';
     }
@@ -184,7 +201,10 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
 
     // get remian balance 
-    const remainBalanceId = document.getElementById('remain-balance');
+    // const remainBalanceId = document.getElementById('remain-balance');
+
+
+    const remainBalanceId = selectElementId('remain-balance');
     // const remainBalanceValue = remainBalanceId.innerText;
     // const remainBalance = parseFloat(remainBalanceValue);
 
