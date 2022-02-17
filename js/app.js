@@ -150,7 +150,6 @@ function updateRemain(income, saveAmount, calcBalance){
 // Get Calculate Button 
 document.getElementById('calculate-btn').addEventListener('click', function(){
 
-    
     // get total Income
     const totalIncome = strToNumber('total-income', 'value');
     // total Expenses
@@ -165,10 +164,8 @@ document.getElementById('save-btn').addEventListener('click', function(){
     // get savings parcent amount 
     const savingsParcentAmount = strToNumber('saving-percent', 'value');
     
-
     // after calculate balance 
     const balance = strToNumber('balance', 'txt');
-
 
     // saving parcent calculate     
         // get total Income
