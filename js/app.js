@@ -32,78 +32,35 @@ function strToNumber(inputId, valueOrTxt){
     }
 }
 
+// select id 
+function selectElementId(elementId){
+    const idName = document.getElementById(elementId)
+    return idName;
+}
 
 // Get Calculate Button 
 document.getElementById('calculate-btn').addEventListener('click', function(){
-    // get total Income 
-    // const incomeField = document.getElementById('total-income');
-    // const incomeValue = incomeField.value;
+    // get total Income
     const totalIncome = strToNumber('total-income', 'value');
-    // console.log(totalIncome);
-    // if(totalIncome<0){
-    //     incomeField.value = '';
-    //     incomeField.placeholder = 'Nagative Value Not Accepted';
-    //     incomeField.style.borderColor = 'red';
-    // }else if(isNaN(totalIncome)){
-    //     incomeField.value = '';
-    //     incomeField.placeholder = 'String Or Empty Not Accepted';
-    //     incomeField.style.borderColor = 'red';
-    // }
 
-
-    // get food cost 
-    // const foodCostField = document.getElementById('food-cost');
-    // const foodCostValue =  foodCostField.value;
-    // const foodCost = parseFloat(foodCostValue);
-
+    // get food cost
     const foodCost = strToNumber('food-cost', 'value');
-
-    // if(foodCost<0){
-    //     foodCostField.value = 'Enter Positive Number';
-    //     foodCostField.style.borderColor = 'red';
-    // }else if(isNaN(foodCost)){
-    //     foodCostField.value = 'Text Not Accepted';
-    //     foodCostField.style.borderColor = 'red';
-    // }
-
 
 
     // get rent cost value 
-    // const rentCostField = document.getElementById('rent-cost');
-    // const rentCostValue =  rentCostField.value;
-    // const rentCost = parseFloat(rentCostValue);
     const rentCost = strToNumber('rent-cost', 'value');
 
-    // if(rentCost<0){
-    //     rentCostField.value = 'Enter Positive Number';
-    //     rentCostField.style.borderColor = 'red';
-    // }else if(isNaN(rentCost)){
-    //     rentCostField.value = 'Text or Empty Not Accepted';
-    //     rentCostField.style.borderColor = 'red';
-    // }
-
-    // get clothe cost value 
-    // const clotheCostField = document.getElementById('clothe-cost');
-    // const clotheCostValue =  clotheCostField.value;
-    // const clotheCost = parseFloat(clotheCostValue);
+    // get clothe cost value
     const clotheCost = strToNumber('clothe-cost', 'value');
-
-    // if(clotheCost<0){
-    //     clotheCostField.value = 'Enter Positive Number';
-    //     clotheCostField.style.borderColor = 'red';
-    // }else if(isNaN(clotheCost)){
-    //     clotheCostField.value = 'Text Not Accepted';
-    //     clotheCostField.style.borderColor = 'red';
-    // }
-
 
     // total Expenses
     const getTotalExpense = foodCost + rentCost + clotheCost;
+    
     // get total expenses 
-    const totalExpenseTxt = document.getElementById('total-expenses');
+    const totalExpenseTxt = selectElementId('total-expenses');
     const totalExpenseValue = totalExpenseTxt.innerText;
     // totalExpenseTxt.innerText = getTotalExpense;
-    const totalExpense = parseFloat(totalExpenseValue)
+    // const totalExpense = parseFloat(totalExpenseValue)
 
 
     if(getTotalExpense>=0){
@@ -138,27 +95,14 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     }
 })
 
-// select id 
-function selectElementId(elementId){
-    const idName = document.getElementById(elementId)
-    return idName;
-}
 
 document.getElementById('save-btn').addEventListener('click', function(){
-    // const saveingsParcentField = document.getElementById('saving-percent');
-    // const savingsParcentValue = saveingsParcentField.value;
-    // const savingsParcentAmount = parseFloat(savingsParcentValue)
-    
-    
+
+    // get savings parcent amount 
     const savingsParcentAmount = strToNumber('saving-percent', 'value');
 
     
-    // get total expenses 
-    // const totalExpenseTxt = document.getElementById('total-expenses');
-    // const totalExpenseValue = totalExpenseTxt.innerText;
-    // const totalExpense = parseFloat(totalExpenseValue)
-
-
+    // get total expenses
     const totalExpense = strToNumber('total-expenses', 'txt')
 
 
@@ -167,24 +111,16 @@ document.getElementById('save-btn').addEventListener('click', function(){
     const balance = strToNumber('balance', 'txt');
 
     // saving parcent calculate     
-        // get total Income 
-    // const incomeField = document.getElementById('total-income');
-    // const incomeValue = incomeField.value;
-    // const totalIncome = parseFloat(incomeValue);
-
-
+        // get total Income
     const totalIncome = strToNumber('total-income', 'value');
 
     const savingsAmount = (totalIncome * savingsParcentAmount) / 100;
     
 
     // updateSaveings
-    // const totalSaving = document.getElementById('saving-amount');
-
     const totalSaving = selectElementId('saving-amount');
 
     // totalSaving.innerText = savingsAmount;
-
     if(savingsParcentAmount == 0){
         totalSaving.innerText = '00';        
     }else if(balance>=savingsAmount){
@@ -194,30 +130,13 @@ document.getElementById('save-btn').addEventListener('click', function(){
         totalSaving.innerText = 'insufficient balance';
         totalSaving.style.color  = 'red';
     }
-    // const savingAmountValue = savingAmountId.innerText;
-    // const totalSaving = parseFloat(savingAmountValue);
-    // console.log(totalSaving);
 
 
     // get remian balance 
-    // const remainBalanceId = document.getElementById('remain-balance');
-
-
     const remainBalanceId = selectElementId('remain-balance');
-    // const remainBalanceValue = remainBalanceId.innerText;
-    // const remainBalance = parseFloat(remainBalanceValue);
 
-
-    
-    // Balance Calculate
-    // const balanceTxt = document.getElementById('balance');    
-    // const balanceValue = balanceTxt.innerText;
-    // // const balance = parseFloat(balanceValue);
-    
     // update remain balance 
     const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
-    // remainBalanceId.innerText = updateRemainBalance;
-
     if(updateRemainBalance>=0){        
         remainBalanceId.innerText = updateRemainBalance;
     }else{
