@@ -33,13 +33,13 @@ function strToNumber(inputId, valueOrTxt){
         const elementValue = parseFloat(getElementValue)
         return elementValue;
     }
-}
+};
 
 // select id 
 function selectElementId(elementId){
     const idName = document.getElementById(elementId)
     return idName;
-}
+};
 
 // total Expenses
 function totalExpenses(){    
@@ -62,7 +62,7 @@ function totalExpenses(){
     }
     return total;
 
-}
+};
 
 // Update remain Balance
 function updateBalanceAndRemain(income, expenses){
@@ -91,15 +91,14 @@ function updateBalanceAndRemain(income, expenses){
         balanceTxt.innerText = 'Insufficient Income';
         balanceTxt.style.color= 'red';
     }
-    
-}
+};
 
 // parcentate calculate q
 function parcentCalc(income, totalParcent){
        
     const parcentAmount = (income * totalParcent) / 100;
      return parcentAmount;
-}
+};
 
 
 // update savings balance
@@ -118,8 +117,7 @@ function updateSaveingBalance(saveParcent, saveAmount, balance){
         totalSaving.innerText = 'Insufficient balance';
         totalSaving.style.color  = 'red';
     }
-    
-}
+};
 
 // update remain balance 
 function updateRemain(income, saveAmount, calcBalance){
@@ -147,7 +145,7 @@ function updateRemain(income, saveAmount, calcBalance){
 
     }
 
-}
+};
 
 // Get Calculate Button 
 document.getElementById('calculate-btn').addEventListener('click', function(){
@@ -160,7 +158,7 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
 
     // Update Balance and Remaining Balance    
     updateBalanceAndRemain(totalIncome, getTotalExpense);
-})
+});
 
 document.getElementById('save-btn').addEventListener('click', function(){
 
@@ -183,4 +181,4 @@ document.getElementById('save-btn').addEventListener('click', function(){
    
     // update remain balance
     updateRemain(totalIncome, savingsAmount , balance);
-})
+});
