@@ -38,14 +38,11 @@ function selectElementId(elementId){
     return idName;
 }
 
-// Get Calculate Button 
-document.getElementById('calculate-btn').addEventListener('click', function(){
-    // get total Income
-    const totalIncome = strToNumber('total-income', 'value');
+// total Expenses
+function totalExpenses(){    
 
     // get food cost
     const foodCost = strToNumber('food-cost', 'value');
-
 
     // get rent cost value 
     const rentCost = strToNumber('rent-cost', 'value');
@@ -53,94 +50,222 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     // get clothe cost value
     const clotheCost = strToNumber('clothe-cost', 'value');
 
-    // total Expenses
-    const getTotalExpense = foodCost + rentCost + clotheCost;
+
     
+    const total = foodCost + rentCost + clotheCost;
     // get total expenses 
     const totalExpenseTxt = selectElementId('total-expenses');
-    const totalExpenseValue = totalExpenseTxt.innerText;
-    // totalExpenseTxt.innerText = getTotalExpense;
-    // const totalExpense = parseFloat(totalExpenseValue)
-
-
-    if(getTotalExpense>=0){
-        totalExpenseTxt.innerText = getTotalExpense;
+    if(total>=0){
+        totalExpenseTxt.innerText = total;
     }
+    return total;
 
+}
 
+// Update remain Balance
+function updateBalanceAndRemain(income, expenses){
+    
     // Balance Calculate
-    const balanceTxt = document.getElementById('balance');    
-    const balanceValue = balanceTxt.innerText;
-    const balance = parseFloat(balanceValue);
+    const balanceTxt = selectElementId('balance');
 
     // remain balance 
     const remainBalanceId = selectElementId('remain-balance');
     // Total saving amount 
     const totalSaving = selectElementId('saving-amount');
     // saving parcent
-    const savingParcent = document.getElementById('saving-percent');
+    const savingParcent =selectElementId('saving-percent');
 
     // update balance and remain balance
-    const updateBalance = totalIncome - getTotalExpense;    
-    if(totalIncome>getTotalExpense){
+    const updateBalance = income - expenses;    
+    if(income>expenses){
         balanceTxt.innerText = updateBalance;
 
         // reset 
         remainBalanceId.innerText = updateBalance;
-        totalSaving.innerText = '00';
+        totalSaving.innerText = '0';
         savingParcent.value = '';
-    }else if(totalIncome<getTotalExpense){
-        balanceTxt.innerText = 'insufficient Income';
+        balanceTxt.style.color= '';
+    }else if(income<expenses){
+        balanceTxt.innerText = 'Insufficient Income';
         balanceTxt.style.color= 'red';
     }
+    
+}
+
+// Get Calculate Button 
+document.getElementById('calculate-btn').addEventListener('click', function(){
+
+    
+    // get total Income
+    const totalIncome = strToNumber('total-income', 'value');
+    // get total Income
+    // const totalIncome = strToNumber('total-income', 'value');
+
+    // // get food cost
+    // const foodCost = strToNumber('food-cost', 'value');
+
+    // // get rent cost value 
+    // const rentCost = strToNumber('rent-cost', 'value');
+
+    // // get clothe cost value
+    // const clotheCost = strToNumber('clothe-cost', 'value');
+
+
+    // foodCost + rentCost + clotheCost
+    // total Expenses
+    const getTotalExpense = totalExpenses();  
+
+    // Update Balance and Remaining Balance    
+    updateBalanceAndRemain(totalIncome, getTotalExpense);
+
+
+
+    // // get total expenses 
+    // const totalExpenseTxt = selectElementId('total-expenses');
+    // // const totalExpenseValue = totalExpenseTxt.innerText;
+    // // const totalExpense = parseFloat(totalExpenseValue)
+
+    // if(getTotalExpense>=0){
+    //     totalExpenseTxt.innerText = getTotalExpense;
+    // }
+
+
+    // // Balance Calculate
+    // const balanceTxt = selectElementId('balance');
+
+    // // remain balance 
+    // const remainBalanceId = selectElementId('remain-balance');
+    // // Total saving amount 
+    // const totalSaving = selectElementId('saving-amount');
+    // // saving parcent
+    // const savingParcent =selectElementId('saving-percent');
+
+    // // update balance and remain balance
+    // const updateBalance = totalIncome - getTotalExpense;    
+    // if(totalIncome>getTotalExpense){
+    //     balanceTxt.innerText = updateBalance;
+
+    //     // reset 
+    //     remainBalanceId.innerText = updateBalance;
+    //     totalSaving.innerText = '0';
+    //     savingParcent.value = '';
+    //     balanceTxt.style.color= '';
+    // }else if(totalIncome<getTotalExpense){
+    //     balanceTxt.innerText = 'insufficient Income';
+    //     balanceTxt.style.color= 'red';
+    // }
+
+
+
+
 })
 
+function parcentCalc(income, totalParcent){
+       
+    const parcentAmount = (income * totalParcent) / 100;
+     return parcentAmount;
+}
 
+
+// update savings balance
+function updateSaveingBalance(saveParcent, saveAmount, balance){
+    // updateSaveings
+    const totalSaving = selectElementId('saving-amount');
+
+    // totalSaving.innerText = savingsAmount;
+    if(saveParcent == 0){
+        totalSaving.innerText = '0';        
+    }else if(balance>=saveAmount){
+        totalSaving.innerText = saveAmount;
+        totalSaving.style.color  = '';
+    }else if(balance<saveAmount){
+        totalSaving.innerText = 'Insufficient balance';
+        totalSaving.style.color  = 'red';
+    }
+    
+}
+
+// totalIncome, savingsAmount , balance
+// update remain balance 
+function updateRemain(income, saveAmount, calcBalance){
+    
+    // get total expenses
+    const totalExpense = strToNumber('total-expenses', 'txt')
+    // get remian balance 
+    const remainBalanceId = selectElementId('remain-balance');
+
+    // update remain balance
+    if(isNaN(calcBalance)){
+        remainBalanceId.innerText = 'balance insaficient';
+        remainBalanceId.style.color = 'red';
+
+    }else{
+        const updateRemainBalance = income - (totalExpense + saveAmount);
+        if(updateRemainBalance>=0){        
+            remainBalanceId.innerText = updateRemainBalance;
+        }else{
+            remainBalanceId.innerText = calcBalance;
+        }        
+        remainBalanceId.style.color = '';
+
+    }
+
+}
 document.getElementById('save-btn').addEventListener('click', function(){
 
     // get savings parcent amount 
     const savingsParcentAmount = strToNumber('saving-percent', 'value');
-
     
-    // get total expenses
-    const totalExpense = strToNumber('total-expenses', 'txt')
-
-
 
     // after calculate balance 
     const balance = strToNumber('balance', 'txt');
+
 
     // saving parcent calculate     
         // get total Income
     const totalIncome = strToNumber('total-income', 'value');
 
-    const savingsAmount = (totalIncome * savingsParcentAmount) / 100;
+    const savingsAmount = parcentCalc(totalIncome, savingsParcentAmount);
     
 
-    // updateSaveings
-    const totalSaving = selectElementId('saving-amount');
+    updateSaveingBalance(savingsParcentAmount, savingsAmount, balance)
+    
+    updateRemain(totalIncome, savingsAmount , balance)
+    // // updateSaveings
+    // const totalSaving = selectElementId('saving-amount');
 
-    // totalSaving.innerText = savingsAmount;
-    if(savingsParcentAmount == 0){
-        totalSaving.innerText = '00';        
-    }else if(balance>=savingsAmount){
-        totalSaving.innerText = savingsAmount;
-        totalSaving.style.color  = '';
-    }else if(balance<savingsAmount){
-        totalSaving.innerText = 'insufficient balance';
-        totalSaving.style.color  = 'red';
-    }
+    // // totalSaving.innerText = savingsAmount;
+    // if(savingsParcentAmount == 0){
+    //     totalSaving.innerText = '0';        
+    // }else if(balance>=savingsAmount){
+    //     totalSaving.innerText = savingsAmount;
+    //     totalSaving.style.color  = '';
+    // }else if(balance<savingsAmount){
+    //     totalSaving.innerText = 'Insufficient balance';
+    //     totalSaving.style.color  = 'red';
+    // }
 
 
-    // get remian balance 
-    const remainBalanceId = selectElementId('remain-balance');
+    // function updateRemain(){
+    //     // get remian balance 
+    //     const remainBalanceId = selectElementId('remain-balance');
+    
+    //     // update remain balance
+    //     if(isNaN(balance)){
+    //         remainBalanceId.innerText = 'balance insaficient';
+    //         remainBalanceId.style.color = 'red';
+    
+    //     }else{
+    //         const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
+    //         if(updateRemainBalance>=0){        
+    //             remainBalanceId.innerText = updateRemainBalance;
+    //         }else{
+    //             remainBalanceId.innerText = balance;
+    //         }        
+    //         remainBalanceId.style.color = '';
+    
+    //     }
 
-    // update remain balance 
-    const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
-    if(updateRemainBalance>=0){        
-        remainBalanceId.innerText = updateRemainBalance;
-    }else{
-        remainBalanceId.innerText = balance;
-    }
+    // }
 
 })
