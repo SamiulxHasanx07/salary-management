@@ -22,10 +22,24 @@ body{
 .pr-bg-color{
     background-color: var(--primary-color);
 }
+/* primary text color  */
+.pr-txt-color{
+    color:var(--primary-color)
+}
+/* Gray Backgound  */
+.bg-gray{
+    background-color: var(--bg-gray);
+}
+
+
 .calculation-section{
     background-color: var(--custom-white);
 }
 
 .dollar-sign{
     width: 20px;
+}
+
+.title,.amount-title{
+    font-size: 1.4rem;
 }
