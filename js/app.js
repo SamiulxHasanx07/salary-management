@@ -8,7 +8,7 @@ function strToNumber(inputId, valueOrTxt){
         const inputValue = parseFloat(inputFieldValue)        
         
         // Input Validation 
-        if(inputValue>0){
+        if(inputValue>=0){
             inputField.style.borderColor = '';
             return inputValue; 
         }else if(isNaN(inputValue)){
@@ -130,10 +130,10 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
 
         // reset 
         remainBalanceId.innerText = updateBalance;
-        totalSaving.innerText = '';
+        totalSaving.innerText = '00';
         savingParcent.value = '';
     }else if(totalIncome<getTotalExpense){
-        balanceTxt.innerText = 'Income not Enough';
+        balanceTxt.innerText = 'insufficient Income';
         balanceTxt.style.color= 'red';
     }
 })
@@ -143,15 +143,14 @@ function selectElementId(elementId){
     const idName = document.getElementById(elementId)
     return idName;
 }
-document.getElementById('save-btn').addEventListener('click', function(){
 
+document.getElementById('save-btn').addEventListener('click', function(){
     // const saveingsParcentField = document.getElementById('saving-percent');
     // const savingsParcentValue = saveingsParcentField.value;
     // const savingsParcentAmount = parseFloat(savingsParcentValue)
     
     
     const savingsParcentAmount = strToNumber('saving-percent', 'value');
-
 
     
     // get total expenses 
@@ -186,9 +185,9 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
     // totalSaving.innerText = savingsAmount;
 
-
-
-    if(balance>=savingsAmount){
+    if(savingsParcentAmount == 0){
+        totalSaving.innerText = '00';        
+    }else if(balance>=savingsAmount){
         totalSaving.innerText = savingsAmount;
         totalSaving.style.color  = '';
     }else if(balance<savingsAmount){
