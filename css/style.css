@@ -25,14 +25,19 @@ body{
 .pr-txt-color{
     color:var(--primary-color)
 }
+/* project body  */
+.project-body {
+    padding: 20px;
+}
+/* calculation section */
 .calculation-section{
     background-color: var(--custom-white);
 }
-
+/* dollar sign size fix  */
 .dollar-sign{
     width: 20px;
 }
-
+/* field section title */
 .title,.amount-title{
     font-size: 1.4rem;
 }
@@ -49,7 +54,6 @@ h1.text-center {
 .red-color::placeholder{
     color:red;
 }
-
 /* mobile responsive */
 @media only screen and (max-width: 600px) {
     /* input font size  */

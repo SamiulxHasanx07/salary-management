@@ -1,4 +1,4 @@
-// Get Input Value & Convert Number 
+// Get Input or Innner Value & Convert Number
 function strToNumber(inputId, valueOrTxt){
     // get Value from input and convert into number 
     const inputField = document.getElementById(inputId);
