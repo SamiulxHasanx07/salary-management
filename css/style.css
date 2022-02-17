@@ -14,7 +14,6 @@ body{
 :root{
     --primary-color:#59A5FF;
     --custom-white: #F8F8F8;
-    --bg-gray: #DCDCDC;
 }
 
 
@@ -26,12 +25,6 @@ body{
 .pr-txt-color{
     color:var(--primary-color)
 }
-/* Gray Backgound  */
-.bg-gray{
-    background-color: var(--bg-gray);
-}
-
-
 .calculation-section{
     background-color: var(--custom-white);
 }
@@ -42,4 +35,25 @@ body{
 
 .title,.amount-title{
     font-size: 1.4rem;
+}
+
+h1.text-center {
+    font-weight: 600;
+}
+/* input border color  */
+.input-wrapper input{
+    border:1px solid var(--primary-color);
+}
+
+/* validation border color  */
+.red-color::placeholder{
+    color:red;
+}
+
+/* mobile responsive */
+@media only screen and (max-width: 600px) {
+    /* input font size  */
+    .input-wrapper input{
+        font-size:14px;
+    }
 }

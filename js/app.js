@@ -10,16 +10,19 @@ function strToNumber(inputId, valueOrTxt){
         // Input Validation 
         if(inputValue>=0){
             inputField.style.borderColor = '';
+            inputField.classList.remove('red-color');
             return inputValue; 
         }else if(isNaN(inputValue)){
             inputField.value = '';
             inputField.placeholder = 'Text Or Empty Not Accepted';
             inputField.style.borderColor = 'red';
+            inputField.classList.add('red-color');
 
         }else if(inputValue<0){
             inputField.value = '';
             inputField.placeholder = 'Nagative Value Not Accepted';
             inputField.style.borderColor = 'red';
+            inputField.classList.add('red-color');
         }
     }
 
@@ -50,8 +53,7 @@ function totalExpenses(){
     // get clothe cost value
     const clotheCost = strToNumber('clothe-cost', 'value');
 
-
-    
+    // total expense 
     const total = foodCost + rentCost + clotheCost;
     // get total expenses 
     const totalExpenseTxt = selectElementId('total-expenses');
@@ -92,74 +94,7 @@ function updateBalanceAndRemain(income, expenses){
     
 }
 
-// Get Calculate Button 
-document.getElementById('calculate-btn').addEventListener('click', function(){
-
-    
-    // get total Income
-    const totalIncome = strToNumber('total-income', 'value');
-    // get total Income
-    // const totalIncome = strToNumber('total-income', 'value');
-
-    // // get food cost
-    // const foodCost = strToNumber('food-cost', 'value');
-
-    // // get rent cost value 
-    // const rentCost = strToNumber('rent-cost', 'value');
-
-    // // get clothe cost value
-    // const clotheCost = strToNumber('clothe-cost', 'value');
-
-
-    // foodCost + rentCost + clotheCost
-    // total Expenses
-    const getTotalExpense = totalExpenses();  
-
-    // Update Balance and Remaining Balance    
-    updateBalanceAndRemain(totalIncome, getTotalExpense);
-
-
-
-    // // get total expenses 
-    // const totalExpenseTxt = selectElementId('total-expenses');
-    // // const totalExpenseValue = totalExpenseTxt.innerText;
-    // // const totalExpense = parseFloat(totalExpenseValue)
-
-    // if(getTotalExpense>=0){
-    //     totalExpenseTxt.innerText = getTotalExpense;
-    // }
-
-
-    // // Balance Calculate
-    // const balanceTxt = selectElementId('balance');
-
-    // // remain balance 
-    // const remainBalanceId = selectElementId('remain-balance');
-    // // Total saving amount 
-    // const totalSaving = selectElementId('saving-amount');
-    // // saving parcent
-    // const savingParcent =selectElementId('saving-percent');
-
-    // // update balance and remain balance
-    // const updateBalance = totalIncome - getTotalExpense;    
-    // if(totalIncome>getTotalExpense){
-    //     balanceTxt.innerText = updateBalance;
-
-    //     // reset 
-    //     remainBalanceId.innerText = updateBalance;
-    //     totalSaving.innerText = '0';
-    //     savingParcent.value = '';
-    //     balanceTxt.style.color= '';
-    // }else if(totalIncome<getTotalExpense){
-    //     balanceTxt.innerText = 'insufficient Income';
-    //     balanceTxt.style.color= 'red';
-    // }
-
-
-
-
-})
-
+// parcentate calculate q
 function parcentCalc(income, totalParcent){
        
     const parcentAmount = (income * totalParcent) / 100;
@@ -174,7 +109,8 @@ function updateSaveingBalance(saveParcent, saveAmount, balance){
 
     // totalSaving.innerText = savingsAmount;
     if(saveParcent == 0){
-        totalSaving.innerText = '0';        
+        totalSaving.innerText = '0';
+        totalSaving.style.color  = '';
     }else if(balance>=saveAmount){
         totalSaving.innerText = saveAmount;
         totalSaving.style.color  = '';
@@ -185,7 +121,6 @@ function updateSaveingBalance(saveParcent, saveAmount, balance){
     
 }
 
-// totalIncome, savingsAmount , balance
 // update remain balance 
 function updateRemain(income, saveAmount, calcBalance){
     
@@ -203,14 +138,30 @@ function updateRemain(income, saveAmount, calcBalance){
         const updateRemainBalance = income - (totalExpense + saveAmount);
         if(updateRemainBalance>=0){        
             remainBalanceId.innerText = updateRemainBalance;
+            remainBalanceId.style.color = '';
         }else{
             remainBalanceId.innerText = calcBalance;
+            remainBalanceId.style.color = '';
         }        
         remainBalanceId.style.color = '';
 
     }
 
 }
+
+// Get Calculate Button 
+document.getElementById('calculate-btn').addEventListener('click', function(){
+
+    
+    // get total Income
+    const totalIncome = strToNumber('total-income', 'value');
+    // total Expenses
+    const getTotalExpense = totalExpenses();  
+
+    // Update Balance and Remaining Balance    
+    updateBalanceAndRemain(totalIncome, getTotalExpense);
+})
+
 document.getElementById('save-btn').addEventListener('click', function(){
 
     // get savings parcent amount 
@@ -227,45 +178,9 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
     const savingsAmount = parcentCalc(totalIncome, savingsParcentAmount);
     
-
-    updateSaveingBalance(savingsParcentAmount, savingsAmount, balance)
-    
-    updateRemain(totalIncome, savingsAmount , balance)
-    // // updateSaveings
-    // const totalSaving = selectElementId('saving-amount');
-
-    // // totalSaving.innerText = savingsAmount;
-    // if(savingsParcentAmount == 0){
-    //     totalSaving.innerText = '0';        
-    // }else if(balance>=savingsAmount){
-    //     totalSaving.innerText = savingsAmount;
-    //     totalSaving.style.color  = '';
-    // }else if(balance<savingsAmount){
-    //     totalSaving.innerText = 'Insufficient balance';
-    //     totalSaving.style.color  = 'red';
-    // }
-
-
-    // function updateRemain(){
-    //     // get remian balance 
-    //     const remainBalanceId = selectElementId('remain-balance');
-    
-    //     // update remain balance
-    //     if(isNaN(balance)){
-    //         remainBalanceId.innerText = 'balance insaficient';
-    //         remainBalanceId.style.color = 'red';
-    
-    //     }else{
-    //         const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
-    //         if(updateRemainBalance>=0){        
-    //             remainBalanceId.innerText = updateRemainBalance;
-    //         }else{
-    //             remainBalanceId.innerText = balance;
-    //         }        
-    //         remainBalanceId.style.color = '';
-    
-    //     }
-
-    // }
-
+    // updateSaveings
+    updateSaveingBalance(savingsParcentAmount, savingsAmount, balance);
+   
+    // update remain balance
+    updateRemain(totalIncome, savingsAmount , balance);
 })
