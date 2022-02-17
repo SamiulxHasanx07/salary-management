@@ -66,7 +66,6 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     const totalExpenseTxt = document.getElementById('total-expenses');
     const totalExpenseValue = totalExpenseTxt.innerText;
     totalExpenseTxt.innerText = getTotalExpense;
-
     const totalExpense = parseFloat(totalExpenseValue)
 
     // Balance Calculate
@@ -88,6 +87,14 @@ document.getElementById('save-btn').addEventListener('click', function(){
     const savingsParcentAmount = parseFloat(savingsParcentValue)
 
 
+    
+    // get total expenses 
+    const totalExpenseTxt = document.getElementById('total-expenses');
+    const totalExpenseValue = totalExpenseTxt.innerText;
+    const totalExpense = parseFloat(totalExpenseValue)
+
+
+
 
     // saving parcent calculate     
         // get total Income 
@@ -105,5 +112,15 @@ document.getElementById('save-btn').addEventListener('click', function(){
     // const totalSaving = parseFloat(savingAmountValue);
     // console.log(totalSaving);
 
+
+    // get remian balance 
+    const remainBalanceId = document.getElementById('remain-balance');
+    const remainBalanceValue = remainBalanceId.innerText;
+    const remainBalance = parseFloat(remainBalanceValue);
+
+
+    // update remain balance 
+    const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
+    remainBalanceId.innerText = updateRemainBalance;
 
 })
