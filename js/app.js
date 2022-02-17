@@ -149,6 +149,8 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
 
 
+    // after calculate balance 
+    const balance = strToNumber('balance', 'txt');
 
     // saving parcent calculate     
         // get total Income 
@@ -164,7 +166,18 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
     // updateSaveings
     const totalSaving = document.getElementById('saving-amount');
-    totalSaving.innerText = savingsAmount;
+
+    // totalSaving.innerText = savingsAmount;
+
+
+
+    if(balance>=savingsAmount){
+        totalSaving.innerText = savingsAmount;
+        totalSaving.style.color  = '';
+    }else{
+        totalSaving.innerText = 'insufficient balance';
+        totalSaving.style.color  = 'red';
+    }
     // const savingAmountValue = savingAmountId.innerText;
     // const totalSaving = parseFloat(savingAmountValue);
     // console.log(totalSaving);
@@ -172,14 +185,24 @@ document.getElementById('save-btn').addEventListener('click', function(){
 
     // get remian balance 
     const remainBalanceId = document.getElementById('remain-balance');
-    const remainBalanceValue = remainBalanceId.innerText;
+    // const remainBalanceValue = remainBalanceId.innerText;
+    // const remainBalance = parseFloat(remainBalanceValue);
 
 
-    const remainBalance = parseFloat(remainBalanceValue);
-
-
+    
+    // Balance Calculate
+    // const balanceTxt = document.getElementById('balance');    
+    // const balanceValue = balanceTxt.innerText;
+    // // const balance = parseFloat(balanceValue);
+    
     // update remain balance 
     const updateRemainBalance = totalIncome - (totalExpense + savingsAmount);
-    remainBalanceId.innerText = updateRemainBalance;
+    // remainBalanceId.innerText = updateRemainBalance;
+
+    if(updateRemainBalance>=0){        
+        remainBalanceId.innerText = updateRemainBalance;
+    }else{
+        remainBalanceId.innerText = balance;
+    }
 
 })
