@@ -1,22 +1,34 @@
 // Get Input Value & Convert Number 
-function valueToNumber(inputId){
-    // get total Income 
+function strToNumber(inputId, valueOrTxt){
+    // get Value from input and convert into number 
     const inputField = document.getElementById(inputId);
-    const inputFieldValue = inputField.value;
-    const inputValue = parseFloat(inputFieldValue)
-    
-    if(inputValue>0){
-        inputField.style.borderColor = 'none';
-        return inputValue; 
-    }else if(isNaN(inputValue)){
-        inputField.value = '';
-        inputField.placeholder = 'Text Or Empty Not Accepted';
-        inputField.style.borderColor = 'red';
+    if(valueOrTxt == 'value'){
+        // convet into Number 
+        const inputFieldValue = inputField.value;
+        const inputValue = parseFloat(inputFieldValue)        
+        
+        // Input Validation 
+        if(inputValue>0){
+            inputField.style.borderColor = '';
+            return inputValue; 
+        }else if(isNaN(inputValue)){
+            inputField.value = '';
+            inputField.placeholder = 'Text Or Empty Not Accepted';
+            inputField.style.borderColor = 'red';
 
-    }else if(inputValue<0){
-        inputField.value = '';
-        inputField.placeholder = 'Nagative Value Not Accepted';
-        inputField.style.borderColor = 'red';
+        }else if(inputValue<0){
+            inputField.value = '';
+            inputField.placeholder = 'Nagative Value Not Accepted';
+            inputField.style.borderColor = 'red';
+        }
+    }
+
+    // get innerText from html element and convert into number 
+    if(valueOrTxt == 'txt'){            
+        const getElemenTxt = document.getElementById(inputId);
+        const getElementValue = getElemenTxt.innerText;
+        const elementValue = parseFloat(getElementValue)
+        return elementValue;
     }
 }
 
@@ -26,7 +38,7 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     // get total Income 
     // const incomeField = document.getElementById('total-income');
     // const incomeValue = incomeField.value;
-    const totalIncome = valueToNumber('total-income');
+    const totalIncome = strToNumber('total-income', 'value');
     // console.log(totalIncome);
     // if(totalIncome<0){
     //     incomeField.value = '';
@@ -44,7 +56,7 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     // const foodCostValue =  foodCostField.value;
     // const foodCost = parseFloat(foodCostValue);
 
-    const foodCost = valueToNumber('food-cost');
+    const foodCost = strToNumber('food-cost', 'value');
 
     // if(foodCost<0){
     //     foodCostField.value = 'Enter Positive Number';
@@ -60,7 +72,7 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     // const rentCostField = document.getElementById('rent-cost');
     // const rentCostValue =  rentCostField.value;
     // const rentCost = parseFloat(rentCostValue);
-    const rentCost = valueToNumber('rent-cost');
+    const rentCost = strToNumber('rent-cost', 'value');
 
     // if(rentCost<0){
     //     rentCostField.value = 'Enter Positive Number';
@@ -74,7 +86,7 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
     // const clotheCostField = document.getElementById('clothe-cost');
     // const clotheCostValue =  clotheCostField.value;
     // const clotheCost = parseFloat(clotheCostValue);
-    const clotheCost = valueToNumber('clothe-cost');
+    const clotheCost = strToNumber('clothe-cost', 'value');
 
     // if(clotheCost<0){
     //     clotheCostField.value = 'Enter Positive Number';
@@ -87,50 +99,68 @@ document.getElementById('calculate-btn').addEventListener('click', function(){
 
     // total Expenses
     const getTotalExpense = foodCost + rentCost + clotheCost;
-
-
     // get total expenses 
     const totalExpenseTxt = document.getElementById('total-expenses');
     const totalExpenseValue = totalExpenseTxt.innerText;
-    totalExpenseTxt.innerText = getTotalExpense;
+    // totalExpenseTxt.innerText = getTotalExpense;
     const totalExpense = parseFloat(totalExpenseValue)
 
+
+    if(getTotalExpense>=0){
+        totalExpenseTxt.innerText = getTotalExpense;
+    }
+
+
     // Balance Calculate
-    const balanceTxt = document.getElementById('balance');
+    const balanceTxt = document.getElementById('balance');    
     const balanceValue = balanceTxt.innerText;
     const balance = parseFloat(balanceValue);
 
 
     // update balance 
-    const updateBalance = totalIncome - getTotalExpense;
-    balanceTxt.innerText = updateBalance;
+    const updateBalance = totalIncome - getTotalExpense;    
+    if(totalIncome>getTotalExpense){
+        balanceTxt.innerText = updateBalance;
+    }else if(totalIncome<getTotalExpense){
+        balanceTxt.innerText = 'Income not Enough';
+        balanceTxt.style.color= 'red';
+    }
 })
 
 
 document.getElementById('save-btn').addEventListener('click', function(){
 
-    const saveingsParcentField = document.getElementById('saving-percent');
-    const savingsParcentValue = saveingsParcentField.value;
-    const savingsParcentAmount = parseFloat(savingsParcentValue)
+    // const saveingsParcentField = document.getElementById('saving-percent');
+    // const savingsParcentValue = saveingsParcentField.value;
+    // const savingsParcentAmount = parseFloat(savingsParcentValue)
+    
+    
+    const savingsParcentAmount = strToNumber('saving-percent', 'value');
 
 
     
     // get total expenses 
-    const totalExpenseTxt = document.getElementById('total-expenses');
-    const totalExpenseValue = totalExpenseTxt.innerText;
-    const totalExpense = parseFloat(totalExpenseValue)
+    // const totalExpenseTxt = document.getElementById('total-expenses');
+    // const totalExpenseValue = totalExpenseTxt.innerText;
+    // const totalExpense = parseFloat(totalExpenseValue)
+
+
+    const totalExpense = strToNumber('total-expenses', 'txt')
 
 
 
 
     // saving parcent calculate     
         // get total Income 
-    const incomeField = document.getElementById('total-income');
-    const incomeValue = incomeField.value;
-    const totalIncome = parseFloat(incomeValue);
+    // const incomeField = document.getElementById('total-income');
+    // const incomeValue = incomeField.value;
+    // const totalIncome = parseFloat(incomeValue);
+
+
+    const totalIncome = strToNumber('total-income', 'value');
 
     const savingsAmount = (totalIncome * savingsParcentAmount) / 100;
-    console.log(savingsAmount);
+    
 
     // updateSaveings
     const totalSaving = document.getElementById('saving-amount');
@@ -143,6 +173,8 @@ document.getElementById('save-btn').addEventListener('click', function(){
     // get remian balance 
     const remainBalanceId = document.getElementById('remain-balance');
     const remainBalanceValue = remainBalanceId.innerText;
+
+
     const remainBalance = parseFloat(remainBalanceValue);
 
 
