@@ -19,7 +19,7 @@
       <!-- Project Body -->
       <section class="container project-body">
         <div class="row align-items-center">
-          <div class="cover-photo col-md-12 col-xl-6 px-3">
+          <div class="cover-photo col-md-12 col-xl-6 px-3 my-3">
             <img class="img-fluid" src="img/cover-photo.jpg" alt="">
           </div>
           <div class="calculation-section col-md-12 col-xl-6 px-1 px-xl-5 py-4 py-sm-5 mt-3 mt-sm-0 overflow-hidden">
@@ -30,7 +30,7 @@
                     <label class="">Income: </label>
                   </div>
                   <div class="col-6">
-                    <input class="form-control bg-gray text-dark" type="text" placeholder="Enter Your Income">
+                    <input id="total-income" class="form-control bg-gray text-dark" type="text" placeholder="Enter Your Income">
                   </div>
                 </div>
               </div>
@@ -42,7 +42,7 @@
                       <label class="">Food: </label>
                     </div>
                     <div class="col-6">
-                      <input class="form-control bg-gray text-dark" type="text" placeholder="Food Cost">
+                      <input id="food-cost" class="form-control bg-gray text-dark" type="text" placeholder="Food Cost">
                     </div>
                   </div>
 
@@ -51,7 +51,7 @@
                       <label class="">Rent: </label>
                     </div>
                     <div class="col-6">
-                      <input class="form-control bg-gray text-dark" type="text" placeholder="Rent Cost">
+                      <input id="rent-cost" class="form-control bg-gray text-dark" type="text" placeholder="Rent Cost">
                     </div>
                   </div>
 
@@ -60,15 +60,15 @@
                       <label class="">Clothes: </label>
                     </div>
                     <div class="col-6">
-                      <input class="form-control bg-gray text-dark" type="text" placeholder="Clothe Cost">
+                      <input id="clothe-cost" class="form-control bg-gray text-dark" type="text" placeholder="Clothe Cost">
                     </div>
                   </div>
 
                   <div class="btn-wrapper d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn pr-bg-color text-white px-5 py-2">Calculate</button>
+                    <button id="calculate-btn" type="button" class="btn pr-bg-color text-white px-5 py-2">Calculate</button>
                   </div>                  
-                  <h3 class="amount-title text-center mt-4">Total Expenses: <span id="total-expenses">5500</span></h3>
-                  <h3 class="amount-title text-center mb-4">Balance: <span id="balance">4500</span></h3>
+                  <h3 class="amount-title text-center mt-4">Total Expenses: <span id="total-expenses">00</span></h3>
+                  <h3 class="amount-title text-center mb-4">Balance: <span id="balance">00</span></h3>
               </div>
 
               <div class="savings-section">
@@ -77,18 +77,18 @@
                       <label for="">save:</label>
                     </div>
                     <div class="col">
-                      <input class="form-control bg-gray text-dark" type="text">
+                      <input id="saving-percent" class="form-control bg-gray text-dark" type="text">
                     </div>
                     <div class="col d-flex justify-content-center">
                       <label for="">&#37;</label>
                     </div>
                     
                     <div class="col">
-                      <button class="btn pr-bg-color text-white px-4">Save</button>
+                      <button id="save-btn" class="btn pr-bg-color text-white px-4">Save</button>
                     </div>
                   </div>
               </div>
-              <h3 class="amount-title text-center mt-4">Saving Amount: <span id="savings-amount">2000</span></h3>
+              <h3 class="amount-title text-center mt-4">Saving Amount: <span id="saving-amount">00</span></h3>
               <h3 class="amount-title text-center">Remaining Balance: <span id="remain-balance">2500</span></h3>
           </div> 
           </div>
